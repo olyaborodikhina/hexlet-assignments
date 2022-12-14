@@ -1,6 +1,5 @@
 package exercise.controller;
 
-import exercise.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -23,18 +22,13 @@ public class PeopleController {
     // BEGIN
     @GetMapping(path = "")
     public List<Map<String, Object>> getPerson() {
-        //ResultSet resultSet  = jdbc.execute("SELECT * FROM person");
-
-        List<Map<String, Object>> list = jdbc.queryForList("SELECT * FROM person");
-        return list;
+        return jdbc.queryForList("SELECT * FROM person");
     }
 
     @GetMapping("/{id}")
     public Map<String, Object> getPersonById(@PathVariable("id") Integer id) {
         String querysql = "SELECT * FROM person WHERE id = " + id;
-        Map<String, Object> p = jdbc.queryForMap(querysql);
-        System.out.println(p);
-        return p;
+        return jdbc.queryForMap(querysql);
     }
     // END
 }
